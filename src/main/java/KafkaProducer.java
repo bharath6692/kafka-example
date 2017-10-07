@@ -1,7 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Properties;
 
 import org.apache.kafka.clients.producer.Producer;
@@ -13,29 +9,24 @@ public class KafkaProducer {
 		Properties prop = new Properties();
 		prop.setProperty("bootstrap.servers","127.0.0.1:9092");
 		prop.setProperty("key.serializer", StringSerializer.class.getName());
-		prop.setProperty("value.serializer", StringSerializer.class.getName());
+		prop.setProperty("value.serializer", EmployerSerializer.class.getName());
 
 		prop.setProperty("acks","1");
 		prop.setProperty("retries","0");
 
-		Producer<String, String> prod = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(prop);
+		Producer<String, Employer> prod = new org.apache.kafka.clients.producer.KafkaProducer<String, Employer>(prop);
 		System.out.println("Hi In Producer");
-		String fileName = "/home/bharath/Documents/input.txt";
+		
+		Employer[] emp = new Employer[3];
+		emp[0] =  new Employer(1,"Sai Bharath");
+		emp[1] =  new Employer(2,"Mani Kumar");
+		emp[2] =  new Employer(3,"Kishore Reddy");
 
-		ProducerRecord<String,String> record ;
-		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				record = new ProducerRecord<String, String>("file_topic","1",line);
-				prod.send(record);
-			}
-			prod.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ProducerRecord<String,Employer> record ;
+		for (int i = 0; i < emp.length; i++) {
+			record = new ProducerRecord<String, Employer>("employer","1",emp[i]);
+			prod.send(record);
 		}
+		prod.close();
 	}
 }
