@@ -1,3 +1,5 @@
+package com.bharath.kafka.examples;
+
 import java.util.Properties;
 
 import org.apache.kafka.clients.producer.Producer;

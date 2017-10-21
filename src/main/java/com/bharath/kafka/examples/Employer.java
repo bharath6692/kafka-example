@@ -1,3 +1,5 @@
+package com.bharath.kafka.examples;
+
 import java.io.Serializable;
 
 

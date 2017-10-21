@@ -1,3 +1,5 @@
+package com.bharath.kafka.examples;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,7 +17,6 @@ public class EmployerDeSerializer implements Deserializer<Employer> {
 
 	}
 
-	@Override
 	public Employer deserialize(String topic, byte[] data) {
 		// TODO Auto-generated method stub
 		Employer e = null; 

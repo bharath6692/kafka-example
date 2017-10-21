@@ -1,3 +1,5 @@
+package com.bharath.kafka.examples;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -14,7 +16,6 @@ public class EmployerSerializer implements Serializer<Employer>{
 
 	}
 
-	@Override
 	public byte[] serialize(String topic, Employer data) {
 		// TODO Auto-generated method stub
 		try {
